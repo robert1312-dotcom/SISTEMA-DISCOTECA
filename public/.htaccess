@@ -1,0 +1,32 @@
+# Habilitar RewriteEngine
+RewriteEngine On
+
+# Redirigir a HTTPS (opcional, comentar si no tienes SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Si el archivo o directorio existe, mostrarlo directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir todas las peticiones a index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Configuración de seguridad adicional
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir XSS
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Prevenir MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Deshabilitar listado de directorios
+Options -Indexes
+
+# Configuración de errores personalizados (opcional)
+# ErrorDocument 404 /404.php
+# ErrorDocument 500 /500.php
