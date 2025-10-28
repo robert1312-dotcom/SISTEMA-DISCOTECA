@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? $pageTitle : 'El Mono Rumbero'; ?></title>
     <link rel="stylesheet" href="../../public/css/styles.css">
+    <style>
+        /* 🔹 Transición suave del header */
+        header {
+            transition: transform 0.4s ease;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +28,7 @@
             </ul>
             <div class="user-info">
                 <?php if(isset($_SESSION['usuario_id'])): ?>
-                    <span class="puntos-badge"> <?php echo $_SESSION['puntos']; ?> Puntos</span>
+                    <span class="puntos-badge"><?php echo $_SESSION['puntos']; ?> Puntos</span>
                     <a href="../usuarios/perfil.php" class="btn-login">👤 <?php echo $_SESSION['nombre']; ?></a>
                     <a href="../../controllers/UsuarioController.php?action=logout" class="btn-logout">Salir</a>
                 <?php else: ?>
@@ -41,3 +50,25 @@
             <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
         </div>
     <?php endif; ?>
+
+    <!-- 🔽 Script para ocultar el header al hacer scroll hacia abajo -->
+    <script>
+        let lastScroll = 0;
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > lastScroll) {
+                // 🔽 Bajando -> ocultar header
+                header.style.transform = "translateY(-100%)";
+            } else {
+                // 🔼 Subiendo -> mostrar header
+                header.style.transform = "translateY(0)";
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
