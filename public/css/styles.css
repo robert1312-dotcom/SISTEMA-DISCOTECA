@@ -332,7 +332,7 @@ nav {
 footer {
     background: rgba(0, 0, 0, 0.8);
     text-align: center;
-    padding: 2rem;
+    padding: 0.5rem;
     margin-top: 4rem;
 }
 
@@ -393,4 +393,32 @@ footer p {
     header {
     transition: transform 0.4s ease; /* 🔹 animación suave al ocultar/mostrar */
     }
+    footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    }
+
+    footer p {
+    margin: 5px 0;
+    }
+
+    .social-links {
+    margin-top: 10px;
+    }
+
+    .social-links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 26px;
+    transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+    color: #00bcd4; /* Cambia a celeste al pasar el mouse */
+    }
+
 }
